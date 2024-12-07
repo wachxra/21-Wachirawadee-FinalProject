@@ -9,7 +9,7 @@ public class EnemyHP : MonoBehaviour
     public Image healthFillImage;  // ตัวแปรสำหรับ Fill Image ของเลือด
     public TextMeshProUGUI healthText;  // ตัวแปรสำหรับแสดงค่าหมายเลขเลือด
 
-    private int currentHealth;  // ค่าปัจจุบันของเลือดศัตรู
+    private int currentHealth; // ค่าปัจจุบันของเลือดศัตรู
     private int maxHealth = 1000;  // เลือดสูงสุดของศัตรู
 
     // Start is called before the first frame update

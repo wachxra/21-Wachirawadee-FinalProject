@@ -938,6 +938,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2155011194255818140, guid: dde02153e9f14514aafaa1066e669567, type: 3}
   m_PrefabInstance: {fileID: 4885469672415267809}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &622822392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8238030055308574965, guid: dde02153e9f14514aafaa1066e669567, type: 3}
+  m_PrefabInstance: {fileID: 4885469672415267809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492469475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &685656139
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,6 +2564,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308245443}
   m_CullTransparentMesh: 1
+--- !u!1 &1412624985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1412624988}
+  - component: {fileID: 1412624987}
+  - component: {fileID: 1412624986}
+  m_Layer: 5
+  m_Name: TextPlayerWinorLose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1412624986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412624985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Player Win / Lose
+--- !u!222 &1412624987
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412624985}
+  m_CullTransparentMesh: 1
+--- !u!224 &1412624988
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412624985}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8.5395, y: 8.5395, z: 8.5395}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3583889359886490675}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 128}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1462344051
 GameObject:
   m_ObjectHideFlags: 0
@@ -3491,6 +3581,11 @@ MonoBehaviour:
   discardsRemaining: 5
   playHandText: {fileID: 520008818}
   discardsText: {fileID: 1852094071}
+--- !u!1 &2031232719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6944200402806333241, guid: 1894511a9f1be644f8f5a1fe67ffcc3c, type: 3}
+  m_PrefabInstance: {fileID: 1654484188751172805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2064050852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4035,7 +4130,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5435238744347236547, guid: 1894511a9f1be644f8f5a1fe67ffcc3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2073846383}
+    - targetCorrespondingSourceObject: {fileID: 5435238744347236547, guid: 1894511a9f1be644f8f5a1fe67ffcc3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1412624988}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6944200402806333241, guid: 1894511a9f1be644f8f5a1fe67ffcc3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3583889359886490679}
     - targetCorrespondingSourceObject: {fileID: 2519507241021251805, guid: 1894511a9f1be644f8f5a1fe67ffcc3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1582575864}
@@ -4045,6 +4146,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5435238744347236547, guid: 1894511a9f1be644f8f5a1fe67ffcc3c, type: 3}
   m_PrefabInstance: {fileID: 1654484188751172805}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3583889359886490679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031232719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2204ee550dae4534ba937e03ab328cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remaining: 5
+  enemyHealth: 10
+  remainingText: {fileID: 520008818}
+  gameOverText: {fileID: 1412624986}
+  playCardButton: {fileID: 622822392}
 --- !u!1001 &4885469672415267809
 PrefabInstance:
   m_ObjectHideFlags: 0
