@@ -49,26 +49,19 @@ public class HorizontalCardHolder : MonoBehaviour
 
     private void BeginDrag(Card card)
     {
-        if (selectedCard && cardCount == 5)
-        {
-            isSelectedFull = true;
-        }
-
-        if (isSelectedFull)
-        {
-
-        }
-        
         selectedCard = card;
     }
 
     void EndDrag(Card card)
     {
-        if (selectedCard == null)
-            return;
+        if (selectedCard == null || selectedCard.transform == null) return;
 
-        selectedCard.transform.DOLocalMove(selectedCard.selected ? new Vector3(0, selectedCard.selectionOffset, 0) : Vector3.zero, tweenCardReturn ? .15f : 0).SetEase(Ease.OutBack);
+        selectedCard.transform.DOLocalMove(
+            selectedCard.selected ? new Vector3(0, selectedCard.selectionOffset, 0) : Vector3.zero,
+            tweenCardReturn ? .15f : 0
+        ).SetEase(Ease.OutBack);
 
+        // Refresh layout
         rect.sizeDelta += Vector2.right;
         rect.sizeDelta -= Vector2.right;
 
@@ -87,6 +80,11 @@ public class HorizontalCardHolder : MonoBehaviour
 
     void Update()
     {
+        cards.RemoveAll(c => c == null);
+
+        Debug.Log($"Selected cards count: {cards.Count(c => c.selected)}");
+
+        // จำกัดการ์ดที่เลือกได้ไม่เกิน 5 ใบ หากผู้ใช้กดคลิกซ้าย
         if (Input.GetMouseButtonDown(0))
         {
             if (cards.Count(c => c.selected) >= 5 && hoveredCard != null && !hoveredCard.selected)
