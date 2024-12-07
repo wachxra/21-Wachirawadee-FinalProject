@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class HorizontalCardHolder : MonoBehaviour
 {
@@ -21,6 +21,10 @@ public class HorizontalCardHolder : MonoBehaviour
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
+    // เพิ่มตัวแปรสำหรับการจำกัดจำนวนการ์ดที่เลือก
+    private const int maxSelectableCards = 5;
+    private int selectedCardCount = 0;  // นับจำนวนการ์ดที่เลือก
+
     void Start()
     {
         for (int i = 0; i < cardsToSpawn; i++)
@@ -31,21 +35,14 @@ public class HorizontalCardHolder : MonoBehaviour
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
-        int cardCount = 0;
-
         foreach (Card card in cards)
         {
             card.PointerEnterEvent.AddListener(CardPointerEnter);
             card.PointerExitEvent.AddListener(CardPointerExit);
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
-            card.name = cardCount.ToString();
-            cardCount++;
         }
     }
-
-    public bool isSelectedFull = false;
-    public int cardCount = 0;
 
     private void BeginDrag(Card card)
     {
@@ -81,14 +78,25 @@ public class HorizontalCardHolder : MonoBehaviour
     {
         cards.RemoveAll(c => c == null);
 
-        Debug.Log($"Selected cards count: {cards.Count(c => c.selected)}");
+        Debug.Log($"Selected cards count: {selectedCardCount}");
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (cards.Count(c => c.selected) >= 5 && hoveredCard != null && !hoveredCard.selected)
+            if (selectedCardCount >= maxSelectableCards && hoveredCard != null && !hoveredCard.selected)
             {
-                Debug.LogWarning("ไม่สามารถเลือกการ์ดเกิน 5 ใบ!");
+                Debug.LogWarning("You can choose only 5 cards!");
                 return;
+            }
+
+            if (hoveredCard != null && !hoveredCard.selected)
+            {
+                hoveredCard.Select();
+                selectedCardCount++;
+            }
+            else if (hoveredCard != null && hoveredCard.selected)
+            {
+                hoveredCard.Deselect();
+                selectedCardCount--;
             }
         }
 
@@ -96,7 +104,11 @@ public class HorizontalCardHolder : MonoBehaviour
         {
             foreach (Card card in cards)
             {
-                card.Deselect();
+                if (card.selected)
+                {
+                    card.Deselect();
+                    selectedCardCount--;
+                }
             }
         }
 

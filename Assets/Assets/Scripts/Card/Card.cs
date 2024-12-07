@@ -161,9 +161,17 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         SelectEvent.Invoke(this, selected);
 
         if (selected)
-            transform.localPosition += (cardVisual.transform.up * selectionOffset);
+            Select();
         else
-            transform.localPosition = Vector3.zero;
+            Deselect();
+    }
+
+    public void Select()
+    {
+        if (selected) return;
+        selected = true;
+
+        transform.localPosition += (cardVisual.transform.up * selectionOffset);
     }
 
     public void Deselect()
