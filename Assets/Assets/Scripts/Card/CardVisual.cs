@@ -62,11 +62,6 @@ public class CardVisual : MonoBehaviour
     private float curveYOffset;
     private float curveRotationOffset;
 
-    private void Start()
-    {
-        // Initial setup will be handled in Initialize method.
-    }
-
     public void Initialize(Card target)
     {
         parentCard = target;
@@ -74,7 +69,6 @@ public class CardVisual : MonoBehaviour
         canvas = GetComponent<Canvas>();
         shadowCanvas = visualShadow.GetComponent<Canvas>();
 
-        // Event Listeners
         parentCard.PointerEnterEvent.AddListener(PointerEnter);
         parentCard.PointerExitEvent.AddListener(PointerExit);
         parentCard.BeginDragEvent.AddListener(BeginDrag);
@@ -194,11 +188,10 @@ public class CardVisual : MonoBehaviour
         if (scaleAnimations)
             transform.DOScale(scaleOnSelect, scaleTransition).SetEase(scaleEase);
 
-        visualShadow.localPosition += (-Vector3.up * 20); // Assuming shadow offset is constant
+        visualShadow.localPosition += (-Vector3.up * 20);
         shadowCanvas.overrideSorting = false;
     }
 
-    // Set Sprite
     public void SetSprite(Sprite sprite)
     {
         if (cardImage != null)

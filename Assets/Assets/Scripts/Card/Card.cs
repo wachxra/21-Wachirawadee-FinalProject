@@ -53,7 +53,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<CardVisual>();
         cardVisual.Initialize(this);
 
-        // Load Sprites from Resources/CardSprites
         var sprites = Resources.LoadAll<Sprite>("CardSprites");
 
         if (sprites.Length > 0)
@@ -61,7 +60,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             Debug.Log($"Loaded {sprites.Length} sprites from Resources/CardSprites.");
             var randomSprite = sprites[Random.Range(0, sprites.Length)];
             Debug.Log($"Randomly selected sprite: {randomSprite.name}");
-            cardVisual.SetSprite(randomSprite); // Assuming CardVisual has a method to set the sprite
+            cardVisual.SetSprite(randomSprite);
         }
         else
         {
@@ -105,7 +104,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        // ไม่มีการทำอะไรใน OnDrag เพราะไม่จำเป็นต้องใช้ในกรณีนี้
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -174,7 +172,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (selected)
         {
             selected = false;
-            transform.localPosition = Vector3.zero; // Reset to zero to deselect
+            transform.localPosition = Vector3.zero;
         }
     }
 

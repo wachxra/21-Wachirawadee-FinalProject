@@ -61,7 +61,6 @@ public class HorizontalCardHolder : MonoBehaviour
             tweenCardReturn ? .15f : 0
         ).SetEase(Ease.OutBack);
 
-        // Refresh layout
         rect.sizeDelta += Vector2.right;
         rect.sizeDelta -= Vector2.right;
 
@@ -84,7 +83,6 @@ public class HorizontalCardHolder : MonoBehaviour
 
         Debug.Log($"Selected cards count: {cards.Count(c => c.selected)}");
 
-        // จำกัดการ์ดที่เลือกได้ไม่เกิน 5 ใบ หากผู้ใช้กดคลิกซ้าย
         if (Input.GetMouseButtonDown(0))
         {
             if (cards.Count(c => c.selected) >= 5 && hoveredCard != null && !hoveredCard.selected)
@@ -143,7 +141,6 @@ public class HorizontalCardHolder : MonoBehaviour
 
         isCrossing = false;
 
-        // Check if cardVisual is not null before calling UpdateIndex
         if (cards[index].cardVisual != null && selectedCard.cardVisual != null)
         {
             bool swapIsRight = cards[index].ParentIndex() > selectedCard.ParentIndex();
