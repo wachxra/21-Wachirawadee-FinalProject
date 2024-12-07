@@ -9,25 +9,21 @@ public abstract class PokerHand : Card
     public int Strength { get; protected set; }
     private IHandStrengthStrategy _strengthStrategy;
 
-    // Constructor for direct strength value (for specific hand types if needed)
     protected PokerHand(string handName, int strength)
     {
         HandName = handName;
         Strength = strength;
     }
 
-    // Constructor with strategy for calculating strength
     protected PokerHand(string handName, IHandStrengthStrategy strengthStrategy)
     {
         HandName = handName;
         _strengthStrategy = strengthStrategy;
-        Strength = _strengthStrategy.CalculateStrength(this); // Calculate strength dynamically
+        Strength = _strengthStrategy.CalculateStrength(this);
     }
 
-    // Abstract method to be implemented by specific hand types
     public abstract void DisplayHandInfo();
 
-    // Enum for Rank (card values)
     public enum Rank
     {
         Ace = 1, Two = 2, Three = 3, Four = 4, Five = 5,
@@ -35,7 +31,6 @@ public abstract class PokerHand : Card
         Jack = 11, Queen = 12, King = 13
     }
 
-    // Compare Strength method to compare hands or strengths
     public virtual int CompareStrength(PokerHand otherHand)
     {
         return Strength.CompareTo(otherHand.Strength);
@@ -45,8 +40,6 @@ public abstract class PokerHand : Card
     {
         return Strength.CompareTo(otherStrength);
     }
-
-    // Enum for Suit (card suits)
     public enum Suit
     {
         Hearts,
@@ -54,20 +47,14 @@ public abstract class PokerHand : Card
         Clubs,
         Spades
     }
-
-    // Get random rank for cards
     public Rank GetRandomRank()
     {
         return (Rank)UnityEngine.Random.Range(1, 14);
     }
-
-    // Get random suit for cards
     public Suit GetRandomSuit()
     {
         return (Suit)UnityEngine.Random.Range(0, 4);
     }
-
-    // Enum for Poker Hand types
     public enum Hand
     {
         RoyalFlush,
@@ -82,7 +69,6 @@ public abstract class PokerHand : Card
         HighCard
     }
 
-    // Static method for getting the damage of a particular hand
     public static int GetDamage(Hand hand)
     {
         switch (hand)
@@ -102,13 +88,11 @@ public abstract class PokerHand : Card
     }
 }
 
-// Strategy Pattern Interface for Strength Calculation
 public interface IHandStrengthStrategy
 {
     int CalculateStrength(PokerHand hand);
 }
 
-// Concrete strategies for different hand strengths
 public class RoyalFlushStrengthStrategy : IHandStrengthStrategy
 {
     public int CalculateStrength(PokerHand hand) => 450;
@@ -159,7 +143,6 @@ public class HighCardStrengthStrategy : IHandStrengthStrategy
     public int CalculateStrength(PokerHand hand) => 50;
 }
 
-// Concrete implementation for a specific Poker hand
 public class RoyalFlush : PokerHand
 {
     public RoyalFlush() : base("Royal Flush", new RoyalFlushStrengthStrategy()) { }
@@ -167,7 +150,7 @@ public class RoyalFlush : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Royal Flush, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.RoyalFlush)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.RoyalFlush));
     }
 }
 
@@ -178,7 +161,7 @@ public class StraightFlush : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Straight Flush, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.StraightFlush)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.StraightFlush));
     }
 }
 
@@ -189,7 +172,7 @@ public class FourOfAKind : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Four of a Kind, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.FourOfAKind)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.FourOfAKind));
     }
 }
 
@@ -200,7 +183,7 @@ public class FullHouse : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Full House, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.FullHouse)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.FullHouse));
     }
 }
 
@@ -211,7 +194,7 @@ public class Flush : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Flush, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.Flush)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.Flush));
     }
 }
 
@@ -222,7 +205,7 @@ public class Straight : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Straight, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.Straight)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.Straight));
     }
 }
 
@@ -233,7 +216,7 @@ public class ThreeOfAKind : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Three of a Kind, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.ThreeOfAKind)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.ThreeOfAKind));
     }
 }
 
@@ -244,7 +227,7 @@ public class TwoPair : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a Two Pair, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.TwoPair)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.TwoPair));
     }
 }
 
@@ -255,7 +238,7 @@ public class OnePair : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a One Pair, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.OnePair)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.OnePair));
     }
 }
 
@@ -266,6 +249,6 @@ public class HighCard : PokerHand
     public override void DisplayHandInfo()
     {
         Debug.Log("This is a High Card, Strength: " + Strength);
-        Debug.Log("Damage: " + GetDamage(Hand.HighCard)); // Display damage
+        Debug.Log("Damage: " + GetDamage(Hand.HighCard));
     }
 }
