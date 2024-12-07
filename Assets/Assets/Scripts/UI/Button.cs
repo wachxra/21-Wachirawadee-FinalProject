@@ -34,6 +34,11 @@ public class Botton : MonoBehaviour
         {
             playHandRemaining--; // Ŵ�ӹǹ Play Hand
             UpdateUI();          // �ѻവ UI
+            Debug.Log("PlayHand clicked. Remaining: " + playHandRemaining);
+        }
+        else
+        {
+            Debug.Log("No Play Hand remaining.");
         }
     }
 
@@ -44,6 +49,11 @@ public class Botton : MonoBehaviour
         {
             discardsRemaining--; // Ŵ�ӹǹ Discards
             UpdateUI();          // �ѻവ UI
+            Debug.Log("Discard clicked. Remaining: " + discardsRemaining);
+        }
+        else
+        {
+            Debug.Log("No Discards remaining.");
         }
     }
 }

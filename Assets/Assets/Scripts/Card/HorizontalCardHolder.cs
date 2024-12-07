@@ -87,12 +87,12 @@ public class HorizontalCardHolder : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Delete))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (hoveredCard != null)
+            if (cards.Count(c => c.selected) >= 5 && hoveredCard != null && !hoveredCard.selected)
             {
-                Destroy(hoveredCard.transform.parent.gameObject);
-                cards.Remove(hoveredCard);
+                Debug.LogWarning("ไม่สามารถเลือกการ์ดเกิน 5 ใบ!");
+                return;
             }
         }
 

@@ -6,82 +6,93 @@ using UnityEngine.UI;
 
 public class EnemyHP : MonoBehaviour
 {
-    public Image healthFillImage;  // ตัวแปรสำหรับ Fill Image ของเลือด
-    public TextMeshProUGUI healthText;  // ตัวแปรสำหรับแสดงค่าหมายเลขเลือด
+    public Image healthFillImage;      // Fill Image ของแถบพลังชีวิต
+    public TextMeshProUGUI healthText; // ข้อความแสดงค่าพลังชีวิต
 
-    private int currentHealth; // ค่าปัจจุบันของเลือดศัตรู
-    private int maxHealth = 1000;  // เลือดสูงสุดของศัตรู
+    public int CurrentHealth => currentHealth;
 
-    // Start is called before the first frame update
+    public int currentHealth;         // พลังชีวิตปัจจุบัน
+    private int maxHealth;            // พลังชีวิตสูงสุด
+
     void Start()
     {
-        // เริ่มต้นเลือดแบบสุ่ม
-        currentHealth = Random.Range(100, maxHealth);
+        // กำหนดพลังชีวิตสูงสุดแบบสุ่มในช่วง 2000 ถึง 5000
+        maxHealth = Random.Range(1000, 3000);
 
-        // ตั้งค่า Fill Amount ให้เต็ม
-        healthFillImage.fillAmount = (float)currentHealth / maxHealth;
+        // กำหนดค่าเริ่มต้นพลังชีวิต
+        currentHealth = maxHealth;
 
-        // แสดงค่าปัจจุบันของเลือดใน Text
-        healthText.text = currentHealth.ToString();
+        // ค้นหา GameObjects ใน Scene ถ้ายังไม่ได้อ้างอิง
+        if (healthFillImage == null)
+        {
+            GameObject fillObject = GameObject.Find("FillHP");
+            if (fillObject != null)
+                healthFillImage = fillObject.GetComponent<Image>();
+        }
+
+        if (healthText == null)
+        {
+            GameObject textObject = GameObject.Find("TextEnemyHPScore");
+            if (textObject != null)
+                healthText = textObject.GetComponent<TextMeshProUGUI>();
+        }
+
+        UpdateHealthUI();
     }
 
-    // ฟังก์ชันลดเลือดจาก Poker Hand
-    public void ApplyPokerHandDamage(PokerHand.Hand hand)
+    // ฟังก์ชันอัปเดต UI
+    private void UpdateHealthUI()
     {
-        int damage = PokerHand.GetDamage(hand);
+        if (healthFillImage != null)
+            healthFillImage.fillAmount = (float)currentHealth / maxHealth;
 
-        // ลดเลือดตามค่า damage
+        if (healthText != null)
+            healthText.text = currentHealth.ToString();
+    }
+
+    // ฟังก์ชันลดพลังชีวิต
+    public void ApplyDamage(int damage)
+    {
         currentHealth -= damage;
         if (currentHealth < 0)
             currentHealth = 0;
 
-        // ปรับค่า Fill Amount ให้ตรงกับเลือด
-        healthFillImage.fillAmount = (float)currentHealth / maxHealth;
-
-        // อัพเดตค่าตัวเลขเลือด
-        healthText.text = currentHealth.ToString();
+        UpdateHealthUI();
     }
 
-    // ฟังก์ชันใช้สำหรับเพิ่มเลือด
-    public void Heal(int healAmount)
+    public void Attack(PokerHand.Hand handType)
     {
-        currentHealth += healAmount;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-
-        // ปรับค่า Fill Amount ให้ตรงกับเลือด
-        healthFillImage.fillAmount = (float)currentHealth / maxHealth;
-
-        // อัพเดตค่าตัวเลขเลือด
-        healthText.text = currentHealth.ToString();
+        int damage = PokerHand.GetDamage(handType);
+        ApplyDamage(damage);
+        Debug.Log($"Enemy took {damage} damage from {handType}");
     }
 
-    float CalculateDamage(string pokerHand)
+    int CalculateDamage(string pokerHand)
     {
         switch (pokerHand)
         {
             case "Royal Flush":
-                return 100f;  // Royal Flush ลดเลือด 100
+                return 450;
             case "Straight Flush":
-                return 80f;  // Straight Flush ลดเลือด 80
+                return 400;
             case "Four of a Kind":
-                return 60f;  // Four of a Kind ลดเลือด 60
+                return 350;
             case "Full House":
-                return 50f;  // Full House ลดเลือด 50
+                return 300;
             case "Flush":
-                return 40f;  // Flush ลดเลือด 40
+                return 280;
             case "Straight":
-                return 30f;  // Straight ลดเลือด 30
+                return 250;
             case "Three of a Kind":
-                return 20f;  // Three of a Kind ลดเลือด 20
+                return 200;
             case "Two Pair":
-                return 10f;  // Two Pair ลดเลือด 10
+                return 150;
             case "One Pair":
-                return 5f;   // One Pair ลดเลือด 5
+                return 100;
             case "High Card":
-                return 2f;   // High Card ลดเลือด 2
+                return 50;
             default:
-                return 0f;   // ไม่มีดาเมจจากการเล่นการ์ดที่ไม่ถูกต้อง
+                return 0;
         }
     }
 }
