@@ -26,9 +26,9 @@ public class EnemyHP : MonoBehaviour
     }
 
     // ฟังก์ชันลดเลือดจาก Poker Hand
-    public void ApplyPokerHandDamage(PokerHands.Hand hand)
+    public void ApplyPokerHandDamage(PokerHand.Hand hand)
     {
-        int damage = PokerHands.GetDamage(hand);
+        int damage = PokerHand.GetDamage(hand);
 
         // ลดเลือดตามค่า damage
         currentHealth -= damage;

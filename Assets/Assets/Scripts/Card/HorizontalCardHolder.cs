@@ -8,7 +8,6 @@ using System.Linq;
 
 public class HorizontalCardHolder : MonoBehaviour
 {
-
     [SerializeField] private Card selectedCard;
     [SerializeReference] private Card hoveredCard;
 
@@ -43,18 +42,6 @@ public class HorizontalCardHolder : MonoBehaviour
             card.name = cardCount.ToString();
             cardCount++;
         }
-
-        StartCoroutine(Frame());
-
-        IEnumerator Frame()
-        {
-            yield return new WaitForSecondsRealtime(.1f);
-            for (int i = 0; i < cards.Count; i++)
-            {
-                if (cards[i].cardVisual != null)
-                    cards[i].cardVisual.UpdateIndex(transform.childCount);
-            }
-        }
     }
 
     private void BeginDrag(Card card)
@@ -62,19 +49,17 @@ public class HorizontalCardHolder : MonoBehaviour
         selectedCard = card;
     }
 
-
     void EndDrag(Card card)
     {
         if (selectedCard == null)
             return;
 
-        selectedCard.transform.DOLocalMove(selectedCard.selected ? new Vector3(0,selectedCard.selectionOffset,0) : Vector3.zero, tweenCardReturn ? .15f : 0).SetEase(Ease.OutBack);
+        selectedCard.transform.DOLocalMove(selectedCard.selected ? new Vector3(0, selectedCard.selectionOffset, 0) : Vector3.zero, tweenCardReturn ? .15f : 0).SetEase(Ease.OutBack);
 
         rect.sizeDelta += Vector2.right;
         rect.sizeDelta -= Vector2.right;
 
         selectedCard = null;
-
     }
 
     void CardPointerEnter(Card card)
@@ -95,7 +80,6 @@ public class HorizontalCardHolder : MonoBehaviour
             {
                 Destroy(hoveredCard.transform.parent.gameObject);
                 cards.Remove(hoveredCard);
-
             }
         }
 
@@ -115,7 +99,6 @@ public class HorizontalCardHolder : MonoBehaviour
 
         for (int i = 0; i < cards.Count; i++)
         {
-
             if (selectedCard.transform.position.x > cards[i].transform.position.x)
             {
                 if (selectedCard.ParentIndex() < cards[i].ParentIndex())
@@ -149,17 +132,15 @@ public class HorizontalCardHolder : MonoBehaviour
 
         isCrossing = false;
 
-        if (cards[index].cardVisual == null)
-            return;
-
-        bool swapIsRight = cards[index].ParentIndex() > selectedCard.ParentIndex();
-        cards[index].cardVisual.Swap(swapIsRight ? -1 : 1);
-
-        //Updated Visual Indexes
-        foreach (Card card in cards)
+        // Check if cardVisual is not null before calling UpdateIndex
+        if (cards[index].cardVisual != null && selectedCard.cardVisual != null)
         {
-            card.cardVisual.UpdateIndex(transform.childCount);
+            bool swapIsRight = cards[index].ParentIndex() > selectedCard.ParentIndex();
+            cards[index].cardVisual.Swap(swapIsRight ? -1 : 1);
+        }
+        else
+        {
+            Debug.LogWarning("cardVisual is null on one or both cards.");
         }
     }
-
 }

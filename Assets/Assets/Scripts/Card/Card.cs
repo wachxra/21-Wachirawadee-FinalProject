@@ -52,6 +52,21 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         visualHandler = FindObjectOfType<VisualCardsHandler>();
         cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<CardVisual>();
         cardVisual.Initialize(this);
+
+        // Load Sprites from Resources/CardSprites
+        var sprites = Resources.LoadAll<Sprite>("CardSprites");
+
+        if (sprites.Length > 0)
+        {
+            Debug.Log($"Loaded {sprites.Length} sprites from Resources/CardSprites.");
+            var randomSprite = sprites[Random.Range(0, sprites.Length)];
+            Debug.Log($"Randomly selected sprite: {randomSprite.name}");
+            cardVisual.SetSprite(randomSprite); // Assuming CardVisual has a method to set the sprite
+        }
+        else
+        {
+            Debug.LogError("No sprites found in Resources/CardSprites. Please check the folder structure and file names.");
+        }
     }
 
     void Update()
@@ -90,6 +105,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
+        // ไม่มีการทำอะไรใน OnDrag เพราะไม่จำเป็นต้องใช้ในกรณีนี้
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -119,7 +135,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         PointerExitEvent.Invoke(this);
         isHovering = false;
     }
-
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -159,13 +174,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (selected)
         {
             selected = false;
-            if (selected)
-                transform.localPosition += (cardVisual.transform.up * 50);
-            else
-                transform.localPosition = Vector3.zero;
+            transform.localPosition = Vector3.zero; // Reset to zero to deselect
         }
     }
-
 
     public int SiblingAmount()
     {
@@ -184,7 +195,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     private void OnDestroy()
     {
-        if(cardVisual != null)
-        Destroy(cardVisual.gameObject);
+        if (cardVisual != null)
+            Destroy(cardVisual.gameObject);
     }
 }
