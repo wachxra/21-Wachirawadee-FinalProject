@@ -22,12 +22,12 @@ public class PokerHand : MonoBehaviour
 
     public Rank GetRandomRank()
     {
-        return (Rank)UnityEngine.Random.Range(1, 14);  // Random rank between 1 and 13
+        return (Rank)UnityEngine.Random.Range(1, 14);
     }
 
     public Suit GetRandomSuit()
     {
-        return (Suit)UnityEngine.Random.Range(0, 4);  // Random suit between 0 and 3
+        return (Suit)UnityEngine.Random.Range(0, 4);
     }
 
     public enum Hand

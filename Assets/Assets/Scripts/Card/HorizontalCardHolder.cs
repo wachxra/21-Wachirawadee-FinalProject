@@ -44,8 +44,21 @@ public class HorizontalCardHolder : MonoBehaviour
         }
     }
 
+    public bool isSelectedFull = false;
+    public int cardCount = 0;
+
     private void BeginDrag(Card card)
     {
+        if (selectedCard && cardCount == 5)
+        {
+            isSelectedFull = true;
+        }
+
+        if (isSelectedFull)
+        {
+
+        }
+        
         selectedCard = card;
     }
 
