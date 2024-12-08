@@ -21,9 +21,8 @@ public class HorizontalCardHolder : MonoBehaviour
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
-    // เพิ่มตัวแปรสำหรับการจำกัดจำนวนการ์ดที่เลือก
     private const int maxSelectableCards = 5;
-    private int selectedCardCount = 0;  // นับจำนวนการ์ดที่เลือก
+    private int selectedCardCount = 0;
 
     void Start()
     {

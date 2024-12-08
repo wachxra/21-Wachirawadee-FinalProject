@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public abstract class PokerHand : Card
 {
@@ -22,7 +23,7 @@ public abstract class PokerHand : Card
         Strength = _strengthStrategy.CalculateStrength(this);
     }
 
-    public abstract void DisplayHandInfo();
+    public abstract void DisplayHandInfo(string _string, int _strength);
 
     public enum Rank
     {
@@ -147,7 +148,7 @@ public class RoyalFlush : PokerHand
 {
     public RoyalFlush() : base("Royal Flush", new RoyalFlushStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Royal Flush, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.RoyalFlush));
@@ -158,7 +159,7 @@ public class StraightFlush : PokerHand
 {
     public StraightFlush() : base("Straight Flush", new StraightFlushStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Straight Flush, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.StraightFlush));
@@ -169,7 +170,7 @@ public class FourOfAKind : PokerHand
 {
     public FourOfAKind() : base("Four of a Kind", new FourOfAKindStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Four of a Kind, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.FourOfAKind));
@@ -180,7 +181,7 @@ public class FullHouse : PokerHand
 {
     public FullHouse() : base("Full House", new FullHouseStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Full House, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.FullHouse));
@@ -191,7 +192,7 @@ public class Flush : PokerHand
 {
     public Flush() : base("Flush", new FlushStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Flush, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.Flush));
@@ -202,7 +203,7 @@ public class Straight : PokerHand
 {
     public Straight() : base("Straight", new StraightStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Straight, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.Straight));
@@ -213,7 +214,7 @@ public class ThreeOfAKind : PokerHand
 {
     public ThreeOfAKind() : base("Three of a Kind", new ThreeOfAKindStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Three of a Kind, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.ThreeOfAKind));
@@ -224,7 +225,7 @@ public class TwoPair : PokerHand
 {
     public TwoPair() : base("Two Pair", new TwoPairStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a Two Pair, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.TwoPair));
@@ -235,7 +236,7 @@ public class OnePair : PokerHand
 {
     public OnePair() : base("One Pair", new OnePairStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a One Pair, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.OnePair));
@@ -246,7 +247,7 @@ public class HighCard : PokerHand
 {
     public HighCard() : base("High Card", new HighCardStrengthStrategy()) { }
 
-    public override void DisplayHandInfo()
+    public override void DisplayHandInfo(string handName, int strength)
     {
         Debug.Log("This is a High Card, Strength: " + Strength);
         Debug.Log("Damage: " + GetDamage(Hand.HighCard));
